@@ -177,15 +177,16 @@ reachable(A, B) :- calls(A, X), reachable(X, B). % rekursif
 linked_method(R, M) :- implements(R, M).
 linked_method(R, M) :- implements(R, M0), reachable(M0, M).
 
-% touched_attr(R,A): attribute A is read/written by a method yang terhubung ke R
+% touched_attr(R,A): attribute A dibaca/ditulis oleh method yang terhubung ke Requirement
+touched_attr(R, A) :- linked_method(R, M), uses(M, A, _).
 
-% linkage(R, Element) with Element = class(C) | method(C,M) | attribute(C,A)
+% linkage(R, method) via linked_method(R, M) 
 linkage(R, method(C, M))    :- linked_method(R, method(C, M)).
 
-linkage(R, attribute(C, A)) :- touched_attr(R, attribute(C, A)).
-% dict parent accessed dynamically (resources[item]) => its keys are linked
+% linkage(R, attribute) via touched_attr(R, A) 
+linkage(R, attribute(C, A)) :--touched_attr(R, attribute(C, A)).
+% atau linked attribute via part_of
 linkage(R, attribute(C, A)) :- touched_attr(R, P), part_of(attribute(C, A), P).
-% a key is used => the containing dict is linked
 linkage(R, attribute(C, P)) :- touched_attr(R, K), part_of(K, attribute(C, P)).
 
 % Requirement terhubung dengan suatu kelas jika menggunakan
