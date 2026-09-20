@@ -184,7 +184,7 @@ touched_attr(R, A) :- linked_method(R, M), uses(M, A, _).
 linkage(R, method(C, M)) :- linked_method(R, method(C, M)).
 
 % linkage(R, attribute) via touched_attr(R, A) 
-linkage(R, attribute(C, A)) :--touched_attr(R, attribute(C, A)).
+linkage(R, attribute(C, A)) :- touched_attr(R, attribute(C, A)).
 % atau linked attribute via part_of
 linkage(R, attribute(C, A)) :- touched_attr(R, P), part_of(attribute(C, A), P).
 linkage(R, attribute(C, P)) :- touched_attr(R, K), part_of(K, attribute(C, P)).
