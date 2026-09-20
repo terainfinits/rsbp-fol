@@ -181,7 +181,7 @@ linked_method(R, M) :- implements(R, M0), reachable(M0, M).
 touched_attr(R, A) :- linked_method(R, M), uses(M, A, _).
 
 % linkage(R, method) via linked_method(R, M) 
-linkage(R, method(C, M))    :- linked_method(R, method(C, M)).
+linkage(R, method(C, M)) :- linked_method(R, method(C, M)).
 
 % linkage(R, attribute) via touched_attr(R, A) 
 linkage(R, attribute(C, A)) :--touched_attr(R, attribute(C, A)).
@@ -191,14 +191,15 @@ linkage(R, attribute(C, P)) :- touched_attr(R, K), part_of(K, attribute(C, P)).
 
 % Requirement terhubung dengan suatu kelas jika menggunakan
 % method atau attribute kelas tersebut
-linkage(R, class(C))        :- linked_method(R, method(C, _)).
-linkage(R, class(C))        :- touched_attr(R, attribute(C, _)).
+linkage(R, class(C)) :- linked_method(R, method(C, _)).
+linkage(R, class(C)) :- touched_attr(R, attribute(C, _)).
 
 % ============================================================
 % 9. CONTOH QUERIES LINKAGE
 % ============================================================
-% ?- id_r(r1, X) % menampikan deskripsi r1
-% ?- linkage(r2, attribute(coffeemaker, water)).    % true
+% ?- id_r(r1, X) % menampikan deskripsi requirement r1
+% ? - id_r(X, Y) % menampilkan deskripsi semua requirement
+% ?- linkage(r2, attribute(coffeemaker, water)).   % true
 % ?- linkage(r2, attribute(menu, menu)).           % false
 % ?- linkage(r2, class(moneymachine)).             % true
-% ?- linkage(R, attribute(menuitem, cost)).      % who depends on drink cost?
+% ?- linkage(R, attribute(menuitem, cost)).      % 
