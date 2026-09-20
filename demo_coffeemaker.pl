@@ -8,7 +8,7 @@
 % ------------------------------------------------------------
 % 1. CLASSES : class(C)
 % ------------------------------------------------------------
-class(coffemaker).
+class(coffeemaker).
 class(menuitem).
 class(menu).
 class(moneymachine).
@@ -16,10 +16,10 @@ class(moneymachine).
 % ------------------------------------------------------------
 % 2. METHODS : method(Class, Method)
 % ------------------------------------------------------------
-method(coffemaker, init).
-method(coffemaker, report).
-method(coffemaker, is_resource_sufficient).
-method(coffemaker, make_coffee).
+method(coffeemaker, init).
+method(coffeemaker, report).
+method(coffeemaker, is_resource_sufficient).
+method(coffeemaker, make_coffee).
 
 method(menuitem, init).
 
@@ -36,13 +36,13 @@ method(moneymachine, make_payment).
 % 3. ATTRIBUTES : attribute(Class, Attribute)
 %    part_of(Child, Parent): dict key inside a dict attribute
 % ------------------------------------------------------------
-attribute(coffemaker, resources).
-attribute(coffemaker, water).
-attribute(coffemaker, milk).
-attribute(coffemaker, coffee).
-part_of(attribute(coffemaker, water),  attribute(coffemaker, resources)).
-part_of(attribute(coffemaker, milk),   attribute(coffemaker, resources)).
-part_of(attribute(coffemaker, coffee), attribute(coffemaker, resources)).
+attribute(coffeemaker, resources).
+attribute(coffeemaker, water).
+attribute(coffeemaker, milk).
+attribute(coffeemaker, coffee).
+part_of(attribute(coffeemaker, water),  attribute(coffeemaker, resources)).
+part_of(attribute(coffeemaker, milk),   attribute(coffeemaker, resources)).
+part_of(attribute(coffeemaker, coffee), attribute(coffeemaker, resources)).
 
 attribute(menuitem, name).
 attribute(menuitem, cost).
@@ -83,14 +83,14 @@ id_r(r14, 'akumulasi profit dan pembayaran dan ditampilkan').
 % 5. IMPLEMENTS : implements(Requirement, method(Class, Method))
 %    (the requirement is realised directly by this method)
 % ------------------------------------------------------------
-implements(r1, method(coffemaker, init)).
+implements(r1, method(coffeemaker, init)).
 
-implements(r2, method(coffemaker, report)).
+implements(r2, method(coffeemaker, report)).
 implements(r2, method(moneymachine, report)).
 
-implements(r3, method(coffemaker, is_resource_sufficient)).
+implements(r3, method(coffeemaker, is_resource_sufficient)).
 
-implements(r4, method(coffemaker, make_coffee)).
+implements(r4, method(coffeemaker, make_coffee)).
 
 implements(r5, method(menuitem, init) ).
 
@@ -118,22 +118,22 @@ calls(method(moneymachine, make_payment), method(moneymachine, process_coins)).
 % 7. USES   uses(method(C,M), attribute(C2,A), Mode)   Mode = read | write
 % ------------------------------------------------------------
 % CoffeeMaker
-uses(method(coffemaker, init), attribute(coffemaker, resources), write).
-uses(method(coffemaker, init), attribute(coffemaker, water),     write).
-uses(method(coffemaker, init), attribute(coffemaker, milk),      write).
-uses(method(coffemaker, init), attribute(coffemaker, coffee),    write).
+uses(method(coffeemaker, init), attribute(coffeemaker, resources), write).
+uses(method(coffeemaker, init), attribute(coffeemaker, water),     write).
+uses(method(coffeemaker, init), attribute(coffeemaker, milk),      write).
+uses(method(coffeemaker, init), attribute(coffeemaker, coffee),    write).
 
-uses(method(coffemaker, report), attribute(coffemaker, resources), read).
-uses(method(coffemaker, report), attribute(coffemaker, water),     read).
-uses(method(coffemaker, report), attribute(coffemaker, milk),      read).
-uses(method(coffemaker, report), attribute(coffemaker, coffee),    read).
+uses(method(coffeemaker, report), attribute(coffeemaker, resources), read).
+uses(method(coffeemaker, report), attribute(coffeemaker, water),     read).
+uses(method(coffeemaker, report), attribute(coffeemaker, milk),      read).
+uses(method(coffeemaker, report), attribute(coffeemaker, coffee),    read).
 
-uses(method(coffemaker, is_resource_sufficient), attribute(coffemaker, resources),  read).
-uses(method(coffemaker, is_resource_sufficient), attribute(menuitem,   ingredients), read).
+uses(method(coffeemaker, is_resource_sufficient), attribute(coffeemaker, resources),  read).
+uses(method(coffeemaker, is_resource_sufficient), attribute(menuitem,   ingredients), read).
 
-uses(method(coffemaker, make_coffee), attribute(coffemaker, resources),   write).
-uses(method(coffemaker, make_coffee), attribute(menuitem,   ingredients), read).
-uses(method(coffemaker, make_coffee), attribute(menuitem,   name),        read).
+uses(method(coffeemaker, make_coffee), attribute(coffeemaker, resources),   write).
+uses(method(coffeemaker, make_coffee), attribute(menuitem,   ingredients), read).
+uses(method(coffeemaker, make_coffee), attribute(menuitem,   name),        read).
 
 % MenuItem
 uses(method(menuitem, init), attribute(menuitem, name),        write).
@@ -225,13 +225,13 @@ orphan_attribute(attribute(C, A)) :-
 % 10. EXAMPLE QUERIES
 % ============================================================
 % ?- id_r(r1, X) % menampikan deskripsi r1
-% ?- linkage(r2, attribute(coffemaker, water)).    % true
+% ?- linkage(r2, attribute(coffeemaker, water)).    % true
 % ?- linkage(r2, attribute(menu, menu)).           % false
 % ?- linkage(r2, class(moneymachine)).             % true
 % ?- modify_candidates(r2, Ms).
 % ?- change_scope(r11, E).
-% ?- affected_requirements(attribute(coffemaker, water), Rs).
+% ?- affected_requirements(attribute(coffeemaker, water), Rs).
 % ?- affected_requirements(method(moneymachine, make_payment), Rs).
-% ?- evidence(r2, attribute(coffemaker, water), M, Mode).
+% ?- evidence(r2, attribute(coffeemaker, water), M, Mode).
 % ?- orphan_method(M).
 % ?- linkage(R, attribute(menuitem, cost)).      % who depends on drink cost?
