@@ -1,9 +1,5 @@
-% ============================================================
-% FOL KNOWLEDGE BASE: Requirement <-> Class/Method/Attribute traceability
-% Source: Python OOP Coffee Machine (Class: CoffeeMaker, MenuItem, Menu, MoneyMachine)
-% Goal  : mencari hubungan antara requirement dan kode
-% Note  : semua nonkapital/lowercase
-% ============================================================
+:- discontiguous attribute/2.
+:- discontiguous part_of/2.
 
 % ------------------------------------------------------------
 % 1. CLASSES : class(C)
@@ -193,13 +189,3 @@ linkage(R, attribute(C, P)) :- touched_attr(R, K), part_of(K, attribute(C, P)).
 % method atau attribute kelas tersebut
 linkage(R, class(C)) :- linked_method(R, method(C, _)).
 linkage(R, class(C)) :- touched_attr(R, attribute(C, _)).
-
-% ============================================================
-% 9. CONTOH QUERIES LINKAGE
-% ============================================================
-% ?- id_r(r1, X) % menampikan deskripsi requirement r1
-% ? - id_r(X, Y) % menampilkan deskripsi semua requirement
-% ?- linkage(r2, attribute(coffeemaker, water)).   % true
-% ?- linkage(r2, attribute(menu, menu)).           % false
-% ?- linkage(r2, class(moneymachine)).             % true
-% ?- linkage(R, attribute(menuitem, cost)).      % 
